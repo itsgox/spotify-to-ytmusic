@@ -1,0 +1,29 @@
+{
+  "name": "spotify-to-ytmusic",
+  "version": "1.0.0",
+  "description": "Get songs from YouTube Music with Spotify data!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "youtube-music-api": "^1.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsgox/spotify-to-ytmusic.git"
+  },
+  "keywords": [
+    "spotify",
+    "youtube",
+    "sty",
+    "spotoyt",
+    "youtube-music"
+  ],
+  "author": "gox",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itsgox/spotify-to-ytmusic/issues"
+  },
+  "homepage": "https://github.com/itsgox/spotify-to-ytmusic#readme"
+}

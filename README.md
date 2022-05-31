@@ -1,1 +1,3 @@
-# spotify-to-ytmusic
+# Spotify to YouTube Music
+
+### This package is still in development...
