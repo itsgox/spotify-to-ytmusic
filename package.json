@@ -1,6 +1,6 @@
 {
   "name": "spotify-to-ytmusic",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Get songs from YouTube Music with Spotify data!",
   "main": "index.js",
   "scripts": {
