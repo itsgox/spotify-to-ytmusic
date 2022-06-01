@@ -42,7 +42,7 @@ let spotifyToYoutubeMusic = SpotifyToYoutubeMusic(spotifyApi)
 // Convert Spotify song to YouTube Music
 
 async function convert() {
-    let song = await spotifyToYoutubeMusic('4cOdK2wGLETKBW3PvgPWqT?')
+    let song = await spotifyToYoutubeMusic('4cOdK2wGLETKBW3PvgPWqT')
     console.log(song) // https://www.youtube.com/watch?v=lYBUbBu4W08
 }
 convert()
@@ -51,11 +51,11 @@ convert()
 Other ways to provide a **Spotify Track ID**.
 
 ```javascript
-await spotifyToYoutubeMusic('4cOdK2wGLETKBW3PvgPWqT?')
+await spotifyToYoutubeMusic('4cOdK2wGLETKBW3PvgPWqT')
 
-await spotifyToYoutubeMusic('https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT?')
+await spotifyToYoutubeMusic('https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT')
 
-await spotifyToYoutubeMusic('spotify:track:4cOdK2wGLETKBW3PvgPWqT?')
+await spotifyToYoutubeMusic('spotify:track:4cOdK2wGLETKBW3PvgPWqT')
 
-await spotifyToYoutubeMusic('https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT?')
+await spotifyToYoutubeMusic('https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT')
 ```
