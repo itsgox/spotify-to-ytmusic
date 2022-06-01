@@ -51,11 +51,15 @@ convert()
 Other ways to provide a **Spotify Track ID**.
 
 ```javascript
-await spotifyToYoutubeMusic('4cOdK2wGLETKBW3PvgPWqT')
-
 await spotifyToYoutubeMusic('https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT')
 
 await spotifyToYoutubeMusic('spotify:track:4cOdK2wGLETKBW3PvgPWqT')
 
 await spotifyToYoutubeMusic('https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT')
+
+await spotifyToYoutubeMusic(['4cOdK2wGLETKBW3PvgPWqT','1UKoB3dGXJlRHFx1EJuMds'])
 ```
+
+## Note
+
+This system is not 100% perfect, and sometimes will not get the right song from YouTube Music.

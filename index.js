@@ -13,7 +13,7 @@ function SpotifyToYoutubeMusic(spotifyAPI) {
 
     //GET FUNCTION
 
-    return async function get(spotifyURL) {
+    return async function get(spotifyTrack) {
 
         //CHECK YOUTUBE MUSIC STATUS
 
@@ -26,14 +26,14 @@ function SpotifyToYoutubeMusic(spotifyAPI) {
         
         let isArray = true
 
-        if (!Array.isArray(spotifyURL)) {
-            spotifyURL = [spotifyURL]
+        if (!Array.isArray(spotifyTrack)) {
+            spotifyTrack = [spotifyTrack]
             isArray = false
         }
 
         //GET TRACKS
 
-        const IDs = spotifyURL.map(URL => URL
+        const IDs = spotifyTrack.map(track => track
             .replace('spotify:track:','')
             .replace('https://open.spotify.com/track/','')
             .replace('https://api.spotify.com/v1/tracks/',''))
