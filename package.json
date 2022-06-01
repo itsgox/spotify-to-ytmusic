@@ -1,7 +1,7 @@
 {
   "name": "spotify-to-ytmusic",
-  "version": "1.0.3",
-  "description": "Get songs from YouTube Music with Spotify data!",
+  "version": "1.0.4",
+  "description": "Convert songs from Spotify to YouTube Music!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
