@@ -3,14 +3,14 @@ const SpotifyAPI = require('spotify-web-api-node')
 
 async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
 
-    //CHECK CLIENT ID & CLIENT SECRET
+    // Check Client ID & Client Secret
 
     if (!clientID || !clientSecret) {
         console.error('\x1b[33m%s\x1b[0m','\nYou need to provide a Client ID & Client Secret\n')
         return null
     }
 
-    //SPOTIFY API SETUP
+    // Spotify API Setup
 
     const spotifyAPI = new SpotifyAPI({
         clientId: clientID,
@@ -19,30 +19,30 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
 
     spotifyAPI.setAccessToken((await spotifyAPI.clientCredentialsGrant()).body.access_token)
     
-    //YOUTUBE MUSIC API SETUP
+    // YouTube Music API Setup
 
     const ytMusic = new YoutubeMusic()
     let ytMusicStatus = false
 
-    //GET FUNCTION
+    // Get Function
 
     return async function get(spotifyID) {
 
-        //CHECK YOUTUBE MUSIC STATUS
+        // Check YouTube Music Status
 
         if (!ytMusicStatus) {
             await ytMusic.initalize()
             ytMusicStatus = true
         }
 
-        //CHECK IF ID IS PROVIDED
+        // Check if ID is provided
 
         if (!spotifyID || spotifyID === '') {
             console.error('\x1b[33m%s\x1b[0m','\nYou need to provide a Spotify Track!\n')
             return null
         }
 
-        //CHECK IF ID IS ARRAY
+        // Check if ID is array
         
         let isArray = true
 
@@ -51,7 +51,7 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
             isArray = false
         }
 
-        //GET TRACKS
+        // Get Track(s)
 
         const IDs = spotifyID.map(track => track
             .replace('spotify:track:','')
@@ -66,13 +66,13 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
             return null
         }
 
-        //GET SONG(S)
+        // Get Song(s)
 
         let ytList = []
 
         for (let i = 0; i < tracks.length; i++) {
 
-            //SEARCH ON YOUTUBE MUSIC
+            // Search on YouTube Music
 
             let track = tracks[i]
             let content = (await ytMusic.search(`${track.artists.map(artist => artist.name).join(' ')} ${track.name}`)).content
@@ -80,19 +80,17 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
             if (content.length < 1) content = (await ytMusic.search(`${track.name} ${track.artists.map(artist => artist.name).join(' ')}`)).content
             if (content.length < 1) content = (await ytMusic.search(`${track.name} ${track.artists[0].name}`)).content
 
-            //SELECT SONG
+            // Select Song
 
             content = content.filter(result => result.type === 'song')
             content.length < 1 ? ytList.push(null) : ytList.push(`https://www.youtube.com/watch?v=${content[0].videoId}`)
         }
 
-        //RETURN
+        // Return Result(s)
 
         ytList = isArray ? ytList : ytList[0]
         return ytList
     }
 }
-
-//EXPORT
 
 module.exports = SpotifyToYoutubeMusic
