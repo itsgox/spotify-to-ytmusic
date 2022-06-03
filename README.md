@@ -1,54 +1,42 @@
-# Spotify to YouTube Music
+## v1.0.5 Changelog
 
-Convert songs from **Spotify** to **YouTube Music**!
+> The authentication is now handled by **spotify-to-ytmusic**, only using a **Client ID** & **Client Secret**, the previously required **Redirect URI** & **Access Token** is not needed anymore.
 
 ## Installation
 
-To use this package, you also need to install **[spotify-web-api-node](https://www.npmjs.com/package/spotify-web-api-node)**.
-
 ```bash
-npm install spotify-to-ytmusic spotify-web-api-node
+npm install spotify-to-ytmusic
 ```
 
 ## Usage
 
-Before using **Spotify to YouTube Music**, you need to setup a **Spotify API client**.
+- To use **Spotify to YouTube Music**, first you need to provide your **Spotify Credentials** (**[Client ID & Client Secret](https://www.avermedia.com/us/creator_central_spotify)**), in order to have access to the **Spotify API**.
+- You can only provide **Spotify Tracks** *(Playlists / Albums / Podcasts are not supported)*
+
+## Example
 
 ```javascript
 const SpotifyToYoutubeMusic = require('spotify-to-ytmusic')
-const SpotifyWebApi = require('spotify-web-api-node')
 
-// Use your Client ID, Client Secret & Redirect URI
+async function example() {
 
-const spotifyApi = new SpotifyWebApi({
-    clientId: 'CLIENT_ID',
-    clientSecret: 'CLIENT_SECRET',
-    redirectUri: 'REDIRECT_URI'
-})
+    // Set Spotify Credentials
 
-// Or use an Access Token
+    const spotifyToYoutubeMusic = await SpotifyToYoutubeMusic({
+        clientID: "CLIENT_ID",
+        clientSecret: "CLIENT_SECRET"
+    })
 
-const spotifyApi = new SpotifyWebApi()
-spotifyApi.setAccessToken('ACCESS_TOKEN')
-```
+    // Convert a Spotify Track
 
-Now using the **spotifyApi**, we can convert songs from **Spotify** to **YouTube Music**.
-
-```javascript
-// Setup spotify-to-ytmusic
-
-let spotifyToYoutubeMusic = SpotifyToYoutubeMusic(spotifyApi)
-
-// Convert Spotify song to YouTube Music
-
-async function convert() {
     let song = await spotifyToYoutubeMusic('4cOdK2wGLETKBW3PvgPWqT')
     console.log(song) // https://www.youtube.com/watch?v=lYBUbBu4W08
 }
-convert()
+
+example()
 ```
 
-Other ways to provide a **Spotify Track ID**.
+*Other ways to provide a **Spotify Track**:*
 
 ```javascript
 await spotifyToYoutubeMusic('https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT')
@@ -57,9 +45,9 @@ await spotifyToYoutubeMusic('spotify:track:4cOdK2wGLETKBW3PvgPWqT')
 
 await spotifyToYoutubeMusic('https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT')
 
-await spotifyToYoutubeMusic(['4cOdK2wGLETKBW3PvgPWqT','1UKoB3dGXJlRHFx1EJuMds'])
+await spotifyToYoutubeMusic(['4cOdK2wGLETKBW3PvgPWqT','06JvOZ39sK8D8SqiqfaxDU'])
 ```
 
 ## Note
 
-This system is not 100% perfect, and sometimes will not get the right song from YouTube Music.
+This system is not 100% perfect, and sometimes will not get the right song(s) from YouTube Music.

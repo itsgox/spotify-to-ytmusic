@@ -1,13 +1,14 @@
 {
   "name": "spotify-to-ytmusic",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Convert songs from Spotify to YouTube Music!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "youtube-music-api": "^1.0.6"
+    "youtube-music-api": "^1.0.6",
+    "spotify-web-api-node": "^5.0.2"
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,10 @@
     "youtube",
     "sty",
     "spotoyt",
-    "youtube-music"
+    "youtube-music",
+    "youtube-music-api",
+    "spotify-to-youtube",
+    "spotify-to-yt"
   ],
   "author": "gox",
   "license": "ISC",

@@ -1,19 +1,32 @@
 const YoutubeMusic = require('youtube-music-api')
+const SpotifyAPI = require('spotify-web-api-node')
 
-function SpotifyToYoutubeMusic(spotifyAPI) {
+async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
 
-    //SPOTIFY API NOT PROVIDED
+    //CHECK CLIENT ID & CLIENT SECRET
 
-    if (!spotifyAPI) return console.error('\x1b[33m%s\x1b[0m','\nYou need to provide an instance of "spotify-web-api-node"\n')
+    if (!clientID || !clientSecret) {
+        console.error('\x1b[33m%s\x1b[0m','\nYou need to provide a Client ID & Client Secret\n')
+        return null
+    }
 
-    //YOUTUBE MUSIC SETUP
+    //SPOTIFY API SETUP
+
+    const spotifyAPI = new SpotifyAPI({
+        clientId: clientID,
+        clientSecret: clientSecret
+    })
+
+    spotifyAPI.setAccessToken((await spotifyAPI.clientCredentialsGrant()).body.access_token)
+    
+    //YOUTUBE MUSIC API SETUP
 
     const ytMusic = new YoutubeMusic()
     let ytMusicStatus = false
 
     //GET FUNCTION
 
-    return async function get(spotifyTrack) {
+    return async function get(spotifyID) {
 
         //CHECK YOUTUBE MUSIC STATUS
 
@@ -22,24 +35,36 @@ function SpotifyToYoutubeMusic(spotifyAPI) {
             ytMusicStatus = true
         }
 
-        //CHECK IF URL IS ARRAY
+        //CHECK IF ID IS PROVIDED
+
+        if (!spotifyID || spotifyID === '') {
+            console.error('\x1b[33m%s\x1b[0m','\nYou need to provide a Spotify Track!\n')
+            return null
+        }
+
+        //CHECK IF ID IS ARRAY
         
         let isArray = true
 
-        if (!Array.isArray(spotifyTrack)) {
-            spotifyTrack = [spotifyTrack]
+        if (!Array.isArray(spotifyID)) {
+            spotifyID = [spotifyID]
             isArray = false
         }
 
         //GET TRACKS
 
-        const IDs = spotifyTrack.map(track => track
+        const IDs = spotifyID.map(track => track
             .replace('spotify:track:','')
             .replace('https://open.spotify.com/track/','')
             .replace('https://api.spotify.com/v1/tracks/',''))
         .map(track => track.includes('?si=') ? track.split('?si=')[0] : track)
 
         const { tracks } = (await spotifyAPI.getTracks(IDs)).body
+
+        if (tracks[0] === null) {
+            console.error('\x1b[33m%s\x1b[0m','\nOnly Spotify Tracks are supported!\n')
+            return null
+        }
 
         //GET SONG(S)
 
