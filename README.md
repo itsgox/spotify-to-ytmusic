@@ -1,6 +1,6 @@
 ## v1.0.5 Changelog
 
-> The authentication is now handled by **spotify-to-ytmusic**, only using a **Client ID** & **Client Secret**, the previously required **Redirect URI** & **Access Token** is not needed anymore.
+> The authentication is now handled by **spotify-to-ytmusic**, only using a **Client ID** & **Client Secret**, the previously required **Redirect URI** & **Access Token** are not needed anymore.
 
 ## Installation
 
