@@ -1,4 +1,4 @@
-const YoutubeMusic = require('youtube-music-api')
+const YoutubeMusic = require('node-youtube-music')
 const SpotifyAPI = require('spotify-web-api-node')
 
 async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
@@ -19,21 +19,9 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
 
     spotifyAPI.setAccessToken((await spotifyAPI.clientCredentialsGrant()).body.access_token)
     
-    // YouTube Music API Setup
-
-    const ytMusic = new YoutubeMusic()
-    let ytMusicStatus = false
-
     // Get Function
 
     return async function get(spotifyID) {
-
-        // Check YouTube Music Status
-
-        if (!ytMusicStatus) {
-            await ytMusic.initalize()
-            ytMusicStatus = true
-        }
 
         // Check if ID is provided
 
@@ -75,15 +63,14 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
             // Search on YouTube Music
 
             let track = tracks[i]
-            let content = (await ytMusic.search(`${track.artists.map(artist => artist.name).join(' ')} ${track.name}`)).content
-            if (content.length < 1) content = (await ytMusic.search(`${track.artists[0].name} ${track.name}`)).content
-            if (content.length < 1) content = (await ytMusic.search(`${track.name} ${track.artists.map(artist => artist.name).join(' ')}`)).content
-            if (content.length < 1) content = (await ytMusic.search(`${track.name} ${track.artists[0].name}`)).content
+            let content = await YoutubeMusic.searchMusics(`${track.artists.map(artist => artist.name).join(' ')} ${track.name}`)
+            if (content.length < 1) content = await YoutubeMusic.searchMusics(`${track.artists[0].name} ${track.name}`)
+            if (content.length < 1) content = await YoutubeMusic.searchMusics(`${track.name} ${track.artists.map(artist => artist.name).join(' ')}`)
+            if (content.length < 1) content = await YoutubeMusic.searchMusics(`${track.name} ${track.artists[0].name}`)
 
             // Select Song
 
-            content = content.filter(result => result.type === 'song')
-            content.length < 1 ? ytList.push(null) : ytList.push(`https://www.youtube.com/watch?v=${content[0].videoId}`)
+            content.length < 1 ? ytList.push(null) : ytList.push(`https://www.youtube.com/watch?v=${content[0].youtubeId}`)
         }
 
         // Return Result(s)

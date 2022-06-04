@@ -4,7 +4,8 @@ Convert songs from **Spotify** to **YouTube Music**!
 
 ## Changelog
 
-> The authentication is now handled by **spotify-to-ytmusic**, only using a **Client ID** & **Client Secret**, the previously required **Redirect URI** & **Access Token** are not needed anymore.
+> - The authentication is now handled by **spotify-to-ytmusic**, only using a **Client ID** & **Client Secret**, the previously required **Redirect URI** & **Access Token** are not needed anymore.
+> - **spotify-to-ytmusic** is now much faster.
 
 ## Installation
 
