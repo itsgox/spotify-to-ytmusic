@@ -5,10 +5,8 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
 
     // Check Client ID & Client Secret
 
-    if (!clientID || !clientSecret) {
-        console.error('\x1b[33m%s\x1b[0m','\nYou need to provide a Client ID & Client Secret\n')
-        return null
-    }
+    if (!clientID) throw new Error('You need to provide a Client ID')
+    if (!clientSecret) throw new Error('You need to provide a Client Secret')
 
     // Spotify API Setup
 
@@ -25,10 +23,7 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
 
         // Check if ID is provided
 
-        if (!spotifyID || spotifyID === '') {
-            console.error('\x1b[33m%s\x1b[0m','\nYou need to provide a Spotify Track!\n')
-            return null
-        }
+        if (!spotifyID || spotifyID === '') throw new Error('You need to provide a Spotify Track!')
 
         // Check if ID is array
         
@@ -49,10 +44,7 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
 
         const { tracks } = (await spotifyAPI.getTracks(IDs)).body
 
-        if (tracks[0] === null) {
-            console.error('\x1b[33m%s\x1b[0m','\nOnly Spotify Tracks are supported!\n')
-            return null
-        }
+        if (tracks[0] === null) throw new Error('Only Spotify Tracks are supported!')
 
         // Get Song(s)
 
