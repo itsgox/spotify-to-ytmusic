@@ -56,10 +56,7 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret, accessToken }) {
             // Search on YouTube Music
 
             let track = tracks[i]
-            let content = await YoutubeMusic.searchMusics(`${track.artists.map(artist => artist.name).join(' ')} ${track.name}`)
-            if (content.length < 1) content = await YoutubeMusic.searchMusics(`${track.artists[0].name} ${track.name}`)
-            if (content.length < 1) content = await YoutubeMusic.searchMusics(`${track.name} ${track.artists.map(artist => artist.name).join(' ')}`)
-            if (content.length < 1) content = await YoutubeMusic.searchMusics(`${track.name} ${track.artists[0].name}`)
+            let content = await YoutubeMusic.searchMusics(`name: ${track.name}, artists: ${track.artists.map(artist => artist.name).join(', ')}`)
 
             // Select Song
 
