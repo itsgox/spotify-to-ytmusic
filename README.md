@@ -29,7 +29,8 @@ async function example() {
 
     const spotifyToYoutubeMusic = await SpotifyToYoutubeMusic({
         clientID: "CLIENT_ID",
-        clientSecret: "CLIENT_SECRET"
+        clientSecret: "CLIENT_SECRET",
+        accessToken: "ACCESS_TOKEN" // Optional
     })
 
     // Convert a Spotify Track

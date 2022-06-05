@@ -1,6 +1,6 @@
 {
   "name": "spotify-to-ytmusic",
-  "version": "1.0.7-1",
+  "version": "1.0.7-2",
   "description": "Convert songs from Spotify to YouTube Music!",
   "main": "index.js",
   "scripts": {

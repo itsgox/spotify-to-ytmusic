@@ -1,7 +1,7 @@
 const YoutubeMusic = require('node-youtube-music')
 const SpotifyAPI = require('spotify-web-api-node')
 
-async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
+async function SpotifyToYoutubeMusic({ clientID, clientSecret, accessToken }) {
 
     // Check Client ID & Client Secret
 
@@ -15,7 +15,8 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret }) {
         clientSecret: clientSecret
     })
 
-    spotifyAPI.setAccessToken((await spotifyAPI.clientCredentialsGrant()).body.access_token)
+    if (!accessToken || accessToken === '') spotifyAPI.setAccessToken((await spotifyAPI.clientCredentialsGrant()).body.access_token)
+    else spotifyAPI.setAccessToken(accessToken)
     
     // Get Function
 
