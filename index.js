@@ -74,7 +74,7 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret, accessToken }) {
 
             content = content.filter(async (song) => await replaceTitle(song.title) === await replaceTitle(track.name))
             content = content.filter(song => song.artists.map(artist => artist.name).join(', ') === track.artists.map(artist => artist.name).join(', '))
-            content.length < 1 ? ytList.push(null) : ytList.push(content[0])
+            content.length < 1 ? ytList.push(null) : ytList.push(`https://www.youtube.com/watch?v=${content[0].youtubeId}`)
         }
 
         // Return Result(s)
