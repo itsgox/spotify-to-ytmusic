@@ -2,11 +2,13 @@
 
 Convert songs from **Spotify** to **YouTube Music**!
 
-## Changelog
+## Features
 
-> - The authentication is now handled by **spotify-to-ytmusic**, only using a **Client ID** & **Client Secret**, the previously required **Redirect URI** & **Access Token** are not needed anymore.
-> - **spotify-to-ytmusic** is now much faster.
-> - The **YouTube Music** results are now much more accurate.
+- Super **easy-to-use**
+- Access/refresh token **not required**
+- Convert **multiple songs**
+- **99% accuracy**
+- Perfect for **Discord Bots**
 
 ## Installation
 
@@ -16,8 +18,8 @@ npm install spotify-to-ytmusic
 
 ## Usage
 
-- To use **Spotify to YouTube Music**, first you need to provide your **Spotify Credentials** (**[Client ID & Client Secret](https://www.avermedia.com/us/creator_central_spotify)**), in order to have access to the **Spotify API**.
-- You can only provide **Spotify Tracks** *(Playlists / Albums / Podcasts are not supported)*
+- To use **spotify-to-ytmusic**, first you need to provide your **[Spotify Credentials](https://www.avermedia.com/us/creator_central_spotify)**, in order to have access to the **Spotify API**.
+- You can only provide **Tracks** // **Playlists**, **Albums** and **Podcasts** are **`NOT`** supported!
 
 ## Example
 
@@ -43,7 +45,7 @@ async function example() {
 example()
 ```
 
-*Other ways to provide a **Spotify Track**:*
+### *Other ways to provide a Spotify Track*
 
 ```javascript
 await spotifyToYoutubeMusic('https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT')
@@ -54,7 +56,3 @@ await spotifyToYoutubeMusic('https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3Pv
 
 await spotifyToYoutubeMusic(['4cOdK2wGLETKBW3PvgPWqT','06JvOZ39sK8D8SqiqfaxDU'])
 ```
-
-## Note
-
-This system is not 100% perfect, and sometimes will not get the right song(s) from YouTube Music.
