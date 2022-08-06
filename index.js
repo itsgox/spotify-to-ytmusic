@@ -55,7 +55,7 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret, accessToken }) {
 
             // Replace Title
 
-            async function replaceTitle(title) {
+            function replaceTitle(title) {
                 let toCut = title.slice(title.indexOf(' ('), title.length)
                 if (title.indexOf(' (') < 0) toCut = ''
                 let title_ = title.replace(toCut, '')
@@ -68,11 +68,11 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret, accessToken }) {
             // Search on YouTube Music
 
             let track = tracks[i]
-            let content = await YoutubeMusic.searchMusics(`${await replaceTitle(track.name)} ${track.artists.map(artist => artist.name).join(' ')}`)
+            let content = await YoutubeMusic.searchMusics(`${replaceTitle(track.name)} ${track.artists.map(artist => artist.name).join(' ')}`)
 
             // Select Song
 
-            content = content.filter(async (song) => await replaceTitle(song.title) === await replaceTitle(track.name))
+            content = content.filter(song => replaceTitle(song.title) === replaceTitle(track.name))
             content = content.filter(song => song.artists.map(artist => artist.name).join(', ') === track.artists.map(artist => artist.name).join(', '))
             content.length < 1 ? ytList.push(null) : ytList.push(`https://www.youtube.com/watch?v=${content[0].youtubeId}`)
         }
