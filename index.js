@@ -1,7 +1,7 @@
-const YoutubeMusic = require('node-youtube-music')
+const YouTubeMusic = require('node-youtube-music')
 const SpotifyAPI = require('spotify-web-api-node')
 
-async function SpotifyToYoutubeMusic({ clientID, clientSecret, accessToken }) {
+async function SpotifyToYouTubeMusic({ clientID, clientSecret, accessToken }) {
 
     // Check Client ID & Client Secret
 
@@ -68,12 +68,20 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret, accessToken }) {
             // Search on YouTube Music
 
             let track = tracks[i]
-            let content = await YoutubeMusic.searchMusics(`${replaceTitle(track.name)} ${track.artists.map(artist => artist.name).join(' ')}`)
+            let content = await YouTubeMusic.searchMusics(`${replaceTitle(track.name)} ${track.artists.map(artist => artist.name).join(' ')}`)
 
             // Select Song
 
             content = content.filter(song => replaceTitle(song.title) === replaceTitle(track.name))
-            content = content.filter(song => song.artists.map(artist => artist.name).join(', ') === track.artists.map(artist => artist.name).join(', '))
+            content = content.filter(song => song.artists[0].name === track.artists[0].name)
+
+            // Filter Explicit
+
+            let explicit = content.filter(song => song.isExplicit)
+            content = explicit.length > 0 ? explicit : content
+
+            // Add YouTube URL
+
             content.length < 1 ? ytList.push(null) : ytList.push(`https://www.youtube.com/watch?v=${content[0].youtubeId}`)
         }
 
@@ -84,4 +92,4 @@ async function SpotifyToYoutubeMusic({ clientID, clientSecret, accessToken }) {
     }
 }
 
-module.exports = SpotifyToYoutubeMusic
+module.exports = SpotifyToYouTubeMusic
