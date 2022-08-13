@@ -73,10 +73,11 @@ async function SpotifyToYouTubeMusic({ clientID, clientSecret, accessToken }) {
             // Select Song
 
             content = content.filter(song => replaceTitle(song.title) === replaceTitle(track.name))
+            content = content.filter(song => song.artists.length > 0)
             content = content.filter(song => song.artists[0].name === track.artists[0].name)
-
+            
             // Filter Explicit
-
+            
             let explicit = content.filter(song => song.isExplicit)
             content = explicit.length > 0 ? explicit : content
 
