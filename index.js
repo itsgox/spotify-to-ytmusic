@@ -1,7 +1,7 @@
 const YouTubeMusic = require('node-youtube-music')
 const SpotifyAPI = require('spotify-web-api-node')
 
-async function SpotifyToYouTubeMusic({ clientID, clientSecret, accessToken }) {
+async function SpotifyToYouTubeMusic({ clientID, clientSecret, accessToken, ytMusicUrl }) {
 
     // Check Client ID & Client Secret
 
@@ -83,7 +83,7 @@ async function SpotifyToYouTubeMusic({ clientID, clientSecret, accessToken }) {
 
             // Add YouTube URL
 
-            content.length < 1 ? ytList.push(null) : ytList.push(`https://www.youtube.com/watch?v=${content[0].youtubeId}`)
+            content.length < 1 ? ytList.push(null) : ytList.push(`https://${ytMusicUrl ? 'music.' : ''}youtube.com/watch?v=${content[0].youtubeId}`)
         }
 
         // Return Result(s)

@@ -34,26 +34,33 @@ async function example() {
     const spotifyToYoutubeMusic = await SpotifyToYoutubeMusic({
         clientID: "CLIENT_ID",
         clientSecret: "CLIENT_SECRET",
-        accessToken: "ACCESS_TOKEN" // Optional
+        accessToken: "ACCESS_TOKEN", // Optional
+        ytMusicUrl: true // Optional
     })
 
     // Convert a Spotify Track
 
     let song = await spotifyToYoutubeMusic('4cOdK2wGLETKBW3PvgPWqT')
-    console.log(song) // https://www.youtube.com/watch?v=lYBUbBu4W08
+    console.log(song) // https://music.youtube.com/watch?v=lYBUbBu4W08
 }
 
 example()
 ```
 
-### Other ways to provide a Spotify Track
+## Other ways to provide a Spotify Track
 
 ```javascript
 await spotifyToYoutubeMusic('https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT')
-
+```
+```javascript
 await spotifyToYoutubeMusic('spotify:track:4cOdK2wGLETKBW3PvgPWqT')
-
+```
+```javascript
 await spotifyToYoutubeMusic('https://api.spotify.com/v1/tracks/4cOdK2wGLETKBW3PvgPWqT')
-
+```
+```javascript
+await spotifyToYoutubeMusic('4cOdK2wGLETKBW3PvgPWqT')
+```
+```javascript
 await spotifyToYoutubeMusic(['4cOdK2wGLETKBW3PvgPWqT','06JvOZ39sK8D8SqiqfaxDU'])
 ```
