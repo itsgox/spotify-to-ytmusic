@@ -35,7 +35,8 @@ async function example() {
         clientID: "CLIENT_ID",
         clientSecret: "CLIENT_SECRET",
         accessToken: "ACCESS_TOKEN", // Optional
-        ytMusicUrl: true // Optional
+        ytMusicUrl: true, // Optional
+        explicit: false // Optional
     })
 
     // Convert a Spotify Track
