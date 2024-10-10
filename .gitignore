@@ -1,3 +1,4 @@
 /node_modules
 package-lock.json
 .eslintrc.js
+/index_.js
